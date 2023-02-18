@@ -1,0 +1,77 @@
+---
+title: Automatic Differentitaion
+date: 2021-01-10 00:00:03 +0000
+categories: [Mathematics]
+tags: [automatic differentiantion,dual number]
+seo:
+  date_modified: 2021-01-10 00:00:03 +0000
+use_math: true
+---
+
+
+
+**컴퓨터는 미분을 어떻게 할까?**
+
+> $f(x) = x^2$
+>
+> $f'(x) = 2x$
+
+$f(x)$를 x에 대하여 어떻게 미분하면 되는지 우리는 쉽게 대답할 수 있다.  
+
+지수에 올라가있는 숫자를 내리고 올라가있던 숫자를 하나 깎아서 다시 올린다.  
+
+이렇듯 공식적으로, 마치 숫자가 아니라 문자를 대하듯 미분을 수행하는 것을 **Manual**하다고 한다.  
+
+<br/>
+
+그러나 컴퓨터는 Manual하게 일을 할 수 없다. 순서와 규칙이 있는 알고리즘으로 알려줘야한다.  
+
+컴퓨터가 미분이라는 일을 할 수 있게 만드는 방법에는 3가지가 있다.
+
+1. Numerical Differentiation
+2. Symbolic Differentiation
+3. Automatic Differentiation
+
+<br/>
+
+#### **Numerical Differentiation**
+
+> $f: R^n\to R$ 일 때, 작은 h에 대하여 아래와 같이 편미분값에 대한 근사가 가능하다.
+>
+> $\frac{df}{dx_i} \approx \frac{f(x+he_i) - f(x)}{h}$
+
+이렇게 수치적으로 근사한 값을 구하는 것이 꼭 나쁘다고 말할 수는 없다. 적절한 h를 구하여 `truncation error`를 최소화하거나, `complex-step derivate` 등의 기법을 통해 빠르고, 꽤나 근사하게 미분값을 추정할 수 있다.  
+
+**Numerical**한 방식이 사양되는 가장 큰 이유는 연산 비용에 있다. 모든 $x_i$에 대한 편미분값을 구하기 위해서는 정확히 n번의 연산이 수행되어야 한다. 뒤에서 알 수 있지만 Automatic한 방식에서는 훨씬 적은 비용으로 연산을 끝낼 수 있다.  
+
+<br/>
+
+#### **Symbolic differentiation**
+
+**Symbolic** 방식은 인간이 수행하는 Manual한 방식을 일일이 함수로 정의해 놓는 것이다. 정확한 미분값을 얻을 수 있다는 장점이 있지만, 당연하게도 너무너무 긴 코딩 노가다가 요구된다.  
+
+> $h(x) = f(x)g(x)$
+>
+> $h'(x) = f'(x)g(x) + f(x)g'(x)$
+
+예를들어 미분의 `곱셈 공식`을 symbolic 하게 구현하기 위해서는 기존에 존재하던 $h(x)$의 코드 길이보다 두 배나 긴 함수가 필요하다. 만약 $f(x)$가 $f(x) = u(x)v(x)$와 같이 다시 또 어떤 함수들의 곱으로 이루어졌다면, $h'(x)$를 구현하기 위해 끔찍한 길이의 `Symbol`이 정의되어야 한다.  
+
+<br/>
+
+#### **Automatic Differentiation**
+
+**Automatic** 방식은 함수의 연산 과정을 Flow 형태로 쪼갠다는 컨셉에서 시작한다.  
+
+Flow는 프로그램에 기본적으로 Symbolic하게 정의되어있는 연산들만을 사용하여 쪼개진다.  
+
+> $f(x_1,x_2) = [sin(\frac({x_1}{x_2}))+\frac({x_1}{x_2})-e^x_2] * [\frac({x_1}{x_2})-e^x_2]$
+>
+> $x_1, x_2$로 이루어진 $f(x)$는 아래와 같은 Flow로 쪼개진다.
+
+
+
+#### **참조**
+
+1. [(Youtube) What is Automatic differentiation](https://www.youtube.com/watch?v=wG_nF1awSSY)
+2. [CSC321 Lecture 10](https://www.cs.toronto.edu/~rgrosse/courses/csc321_2018/slides/lec10.pdf)
+3. [Algorithm for optimization Chapter 3](https://mitpress.mit.edu/books/algorithms-optimization)

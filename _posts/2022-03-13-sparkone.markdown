@@ -1,0 +1,129 @@
+---
+title: Spark, Cluster Computing with Working Sets (2010)
+date: 2022-03-13 00:00:00 +0800
+categories: [Paper Review]
+tags: [spark]
+seo:
+  date_modified: 2022-03-13 20:07:02 +0800
+---
+
+  
+
+스파크가 어떻게 돌아가는지 알고 싶었다.  
+
+유튜브에 영상들을 찾아보면 너무 쉽거나 (In 3 minutes 어쩌구) 너무 어렵거나 (Deep-dive 어쩌구).  
+
+논문을 찾아보는건 조금 무서웠는데, 막상 찾아보니 그렇게 길지 않아서 한 번 읽고 정리해보았다.  
+
+<br/>
+
+## <b>Spark: Cluster Computing with Working Sets</b>
+
+#### <b>Abstract</b>
+
+분산 컴퓨팅의 역사는 잘 모르겠다. 하여튼 Hadoop이라는 대장이 있고, 그 녀석은 map-reduce라는 방식으로 일한다. 그런데 map-reduce 방식은 이차방정식 100문제를 풀라고 시키면, 근의 공식이 쓰여진 교과서를 100번 꺼내보는 방법이란다. 비효율적이라는 말이다. 지금 시대의 머신러닝은 반복 학습이 핵심인데, 똑똑하게 일하는 친구가 필요했다. Spark가 그러하다. 아니 Spark가 취하고 있는 RDD라는 자료구조가 똑똑하다고 한다. 10배 그러하다고 한다.  
+
+<br/>
+
+#### <b>1. Introduction</b>
+
+RDD는 혈통이라는 개념으로 작동된다. 말그대로 자료 구조가 피를 타고 흘러 내려간다는 개념이다. 내려가기만 하기 때문에 아래물이 윗물을 더럽히거나 파괴할 수 없다. 이런 특징은 우리의 어떤 작업이 중간에 박살났을 때 유리하다. 끔찍한 소리일 수 있지만, 우리는 조상격의 데이터를 깨끗하게 가지고 있고, 또 혈통에 대한 족보가 있기 때문에 자식을 복원해낼 수 있다.  
+
+<br/>
+
+#### <b>2. Programmin model</b>
+
+스파크를 사용한다는 것은, 개발자가 `driver program`을 작성한다는 것과 같은 개념이다. 스파크는 개발자의 코드가 개쩔게 돌아가게 하기 위해 두 가지 기능을 제공하는데 `(1) RDD 라는 자료구조`와 `(2) 병렬 처리`이다.  
+
+<br/>
+
+> **2.1 Resilient Distributed Datasets (RDDs)**  
+>
+> RDD는 여러 머신에 나누어져 있는 READ-ONLY 객체라고 한다. 뭔소린지 모르겠다.  
+>
+> 하여튼 개발자는 이 자료구조를 4가지 단계로 마주하게 된다.  
+>
+> 1. file - 하둡 저장소(HDFS) 같은 곳에 파일 형태로 존재하는 단계  
+> 2. parallelizing - 파일을 여러개로 쪼개는 단계  
+> 3. transforming - 쪼개진 파일을 씹고 뜯고 맛보는 단계
+> 4. cache or save - 가공한 데이터를 저장소(save)나 RAM(cache)에 옮기는 단계
+
+<br/>
+
+> **2.2 Parallel Operations**  
+>
+> RDD 자료구조에 3가지 병렬 처리 기법을 적용할 수 있다고 한다. (12년 전 기준)  
+>
+> 1. reduce: 데이터들에 함수를 갈겨 결과물을 받는다.
+> 2. collect: 데이터를 한 곳으로 모은다.
+> 3. foreach: 각 개별 데이터에 함수를 갈긴다.
+>
+>   
+>
+> 예를들어 collect를 사용해 어떤 Array를 조작한다는 것은,    
+> 데이터를 쪼개고(parallelizing) 가공(transforming )한 뒤, collect 하는 것이라 볼 수 있다.  
+
+<br/>
+
+#### <b>3. Examples</b>
+
+> **EX1) TEXT SEARCH**
+>
+> ```scala
+> val file  = spark.textFile("hdfs://...")
+> val errs  = file.filter(_.contains("ERROR"))
+> val ones  = errs.map(_ => 1)
+> val count = ones.reduce(_+_)   
+> ```
+>
+
+파일 시스템에서 텍스트를 가져온다. 문장중에 "ERROR" 포함하지 않은 것을 버린다. 모든 문장을 1이라는 숫자로 바꾼다. 모든 1이라는 숫자를 더한다. 이렇듯 쭉 읽어지는 의식의 흐름이 Spark가 일하는 방식이다. 방향성이 있는 그래프와 같은 모습으로 위에서 아래로 데이터를 흘려보낸다.  
+
+우리가 할당한 하나 하나의 변수는 모두 RDD라고 볼 수 있는데, 그 중 errs와 ones와 같이 혈통상에서 의미적으로만 존재하며 실제로 materialized되지 않는 것들을 논문에서는 `Lazy RDD`라는 이름으로 부른다.  
+
+<br/>
+
+> <b>EX2) Logistic Regression</b>
+>
+> ```scala
+> // Read points from a text file and cache them
+> val points = (
+>     spark.textFile(...).
+>     map(parsePoint).cache()
+> )
+> 
+> // Initialize w to random D-dimensional vector
+> var w = Vector.random(D)
+> 
+> // Run multiple iterations to update w
+> for (i <- 1 to ITERATIONS) {
+> 	val grad = spark.accumulator(new Vector(D))
+>     for (p <- points) { // Runs in parallel
+> 		val s = (1/(1+exp(-p.y*(w dot p.x)))-1)*p.y
+> 		grad += s * p.x
+> 	}
+> 	w -= grad.value
+> }
+> ```
+
+정확히 이해가 안되는데, for loop 밖에서 선언한 points 변수에 대한 `for(p <- points){body}` 반복문은 `points.foreach(p => {body})` 와 같은 작업과 같은 원리로 병렬로 작동하는 듯 하다. `spark.accumulator`는 선언한 변수에 여러번 누적하여 작업이 필요한 경우 사용하는 함수이다.  accumultaor와 for loop 사용을 통해 순차적 프로그래밍과 같이 코드를 작성해도 내부적으로는 병렬처리의 효과를 얻을 수 있다.  
+
+<br/>
+
+#### <b>5. Result</b>
+
+기본적으로 Spark의 병렬 연산은 MapReduce 모델을 적용하는데, 여러가지(?) 이유로 데이터 손실과 같은 이슈에 강하고 반복문 형태의 MapReudce보다 활용성이 높다고 한다. 따라서 여러 데이터 셋을 정의하고 유연하게 쿼리를 날려야 하는 데이터 분석 환경에서 더욱 유리하다. 짱이라고 한다!  
+
+<br/>
+
+**참고**
+
+<img src="/assets/img/pr/sparkone1.jpg">  
+
+<center><small>MapReduce 한 장 설명</small></center>
+<br/>
+
+**참조**
+
+- 논문 링크: [Spark: Cluster Computing with Working Sets](https://www.usenix.org/legacy/event/hotcloud10/tech/full_papers/Zaharia.pdf)
+- 쉬운 설명 자료: [Spark 의 핵심은 무엇인가? RDD!](https://www.slideshare.net/yongho/rdd-paper-review)

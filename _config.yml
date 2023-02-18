@@ -21,7 +21,7 @@ timezone:
 
 title: Chioni Blog                          # the main title
 
-tagline: A text-focused Jekyll theme   # it will display as the sub-title
+tagline: Imagination is more important than knowledge   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   Imagination is more important than knowledge
@@ -81,7 +81,7 @@ theme_mode:   # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar:  /assets/img/sample/avatar.jpg
 
 # boolean type, the global switch for ToC in posts.
 toc: true
