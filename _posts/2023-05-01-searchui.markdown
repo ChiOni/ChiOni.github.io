@@ -1,5 +1,5 @@
 ---
-title: Figma를 사용하여 지표 검색 페이지 기획하기  
+title: 지표를 검색하는 대시보드를 만든다면  
 date: 2023-05-01 00:00:03 +0000
 categories: [Tips for Working, Figma]
 tags: [figma,search]
@@ -36,13 +36,3 @@ seo:
 지표에게 가장 중요하지 않은 것은 세 번째 질문. 어떻게 가공하였는가 이다. 예를들어 인플레이션 지표를 생각해보자. 에너지 물가가 어떻게 가공되었는지 궁금한 적이 한 번이라도 있었는가? 거래별 평균을 내었는지, 거래량에 가중 평균을 내었는지, 집계 과정에서 극단치를 제거하였는지... 이런 것들을 궁금해하는 사용자는 이미 대시보드에서 헤매지 않는 고수일 가능성이 높다. 사실은 답정너였다. 우리는 어떤 데이터를 사용하여 만든 지표인지를 통해 검색 기능을 제공하려고 한다.
 
 <br>
-
-### <b>Figma 기초기초</b>  
-
-[참조: Introducing Figma: A Beginners Tutorial (2023 UI UX Design)](https://www.youtube.com/watch?v=JGLfyTDgfDc)  
-
-<img src="/assets/img/wt/searchui/searchui3.jpg">  
-
-<center><small>와 진짜 별론데 재밌다</small></center>
-
-우선 지표 검색 페이지 첫 화면의 레이아웃은 검색 조건을 추가하는 부분과 현재 추가되어 있는 검색 조건들을 볼 수 있는 부분들로 나뉜다. 기본적으로 여러가지 조건들을 사용하여 검색을 진행하는 것을 전제하는데, 
