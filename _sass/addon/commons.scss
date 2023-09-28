@@ -1,5 +1,10 @@
 @import url(http://www.openhiun.com/hangul/nanumbarungothic.css);
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;800&family=Roboto:wght@100&display=swap');
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css);
 
 
 /*
@@ -39,7 +44,7 @@ body {
     env(safe-area-inset-bottom) env(safe-area-inset-left);
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
-  font-family: "Nanum Barun Gothic", "Source Sans Pro", "Microsoft Yahei", sans-serif;
+  font-family: "Nanum Barun Gothic","Nanum Gothic", "Source Sans Pro", "Microsoft Yahei", sans-serif;
 }
 
 /* --- Typography --- */
