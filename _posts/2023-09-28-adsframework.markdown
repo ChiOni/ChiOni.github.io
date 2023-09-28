@@ -1,13 +1,35 @@
 ---
-title: 종합적인 판단을 내릴 수 있는 대시보드를 만드려면    
-date: 2023-05-23 00:00:03 +0000
-categories: [Tips for Working, Dashboard]
-tags: [dashboard]
+title: 지속 가능한 탐지 알림 서비스를 만드려면  
+date: 2023-09-28 00:00:03 +0000
+categories: [Tips for Working, Detection]
+tags: [alert, detection]
 seo:
-  date_modified: 2023-05-23 00:00:03 +0000
+  date_modified: 2023-09-28 00:00:03 +0000
 ---
 
+[참조: Palantir Blog - Alerting and Detection Strategy Framework](https://blog.palantir.com/alerting-and-detection-strategy-framework-52dc33722df2)
+
+위 글은 내가 사랑하는 팔란티어의 블로그에 17년에 포스트 된 글이다. 
+
+이슈 대응의 프로세스가 지속 가능하기 위해 지켜야 하는 Framework에 대한 개념글이다.   
+
+이 회사는 정말로 이렇게 일하고 있을까.?   
+
 <br>
+
+## 용어 설명
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## **종합적인 판단이란 무엇일까?**
 

@@ -1,5 +1,5 @@
 ---
-title: 지표를 검색하는 대시보드를 만든다면  
+title: 지표 검색이 필요한 대시보드를 만든다면  
 date: 2023-05-01 00:00:03 +0000
 categories: [Tips for Working, Figma]
 tags: [figma,search]

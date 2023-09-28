@@ -129,7 +129,7 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
   }
   >h3 {
     font-size: 1rem;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Nanum Barun Gothic','Oswald', sans-serif;
     color: gray;
   }
 }
@@ -147,7 +147,7 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
   >h3 {
     color: gray;
     font-size: 1.1rem;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Nanum Barun Gothic','Oswald', sans-serif;
   }
   .card {
     border: 1px solid var(--card-border-color);
@@ -260,7 +260,7 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
 
 
 .share-label {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Nanum Barun Gothic','Oswald', sans-serif;
   &::after {
     content: ":";
   }
