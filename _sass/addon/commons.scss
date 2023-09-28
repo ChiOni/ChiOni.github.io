@@ -1,4 +1,6 @@
 @import url(http://www.openhiun.com/hangul/nanumbarungothic.css);
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;800&family=Roboto:wght@100&display=swap');
+
 
 /*
   The common styles
@@ -37,7 +39,7 @@ body {
     env(safe-area-inset-bottom) env(safe-area-inset-left);
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
-  font-family: 'Nanum Barun Gothic';
+  font-family: "Nanum Barun Gothic", "Source Sans Pro", "Microsoft Yahei", sans-serif;
 }
 
 /* --- Typography --- */
