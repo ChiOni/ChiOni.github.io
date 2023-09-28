@@ -9,10 +9,6 @@ seo:
 
 <br/>
 
-<img src="/assets/img/chat/howtowinfriends1.jpg">
-
-
-
 너 요새 무슨 책 읽어?  
 
 응 나는 요새 **인간관계론** 읽고 있어.  
