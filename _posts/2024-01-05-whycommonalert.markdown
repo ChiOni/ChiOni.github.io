@@ -1,5 +1,5 @@
 ---
-title: 범용적인 알림 시스템을 왜 만들어야 하는지 논리
+title: 범용적인 알림 시스템을 왜 만들어야 하냐면
 date: 2024-01-05 00:00:03 +0000
 categories: [Tips for Working, Detection]
 tags: [alert]

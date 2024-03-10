@@ -1,5 +1,5 @@
 ---
-title: 좋은 문제 정의란 무엇일까
+title: 문제 정의를 잘 하려면
 date: 2023-10-15 00:00:03 +0000
 categories: [Tips for Working, PM]
 tags: [problem definition]
@@ -71,7 +71,7 @@ seo:
 
 <br>
 
-## 좋은 문제 정의를 하는 팁  
+## 문제 정의를 잘 하려면  
 
 문제란 <ins>단기적으로 해결 가능한</ins> 형태로, 그리고 <ins>정량적으로 측정 가능한</ins> 형태로 정의되어야 한다.  
 
